@@ -1,8 +1,8 @@
 /* ===== ตั้งค่าร้าน (แก้ตรงนี้) ===== */
 const CONFIG = {
-  phone: '',          // เบอร์โทรร้าน เช่น '0812345678'
+  phone: '098-254-6446',          // เบอร์โทรร้าน เช่น '0812345678'
   lineId: '',         // LINE OA เช่น '@rehome' (มี @ นำหน้า)
-  sheetUrl: ''        // URL ของ Google Apps Script (ดู README ข้อ 3)
+  sheetUrl: 'https://docs.google.com/spreadsheets/d/1GCe4uX6LGGFHgMQFgp6JsXLcmd_FuwgPN7CI8URtdV4/edit?usp=sharing'        // URL ของ Google Apps Script (ดู README ข้อ 3)
 };
 /* ================================== */
 
