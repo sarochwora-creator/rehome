@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Rehome หลังบ้าน</title>
+<link rel="icon" href="images/mark.jpg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@600;700&family=Sarabun:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#F7F5F2;--surface:#fff;--fg:#2B2A28;--muted:#6E6A64;--line:#E2DDD6;--brand:#2F2E2C;--accent:#9A5F2A;--soft:#EFEAE3;--bad:#B3261E}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 "Sarabun",system-ui,sans-serif}
+h1,h2,legend{font-family:"Bai Jamjuree","Sarabun",sans-serif}
+header{background:var(--brand);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+header img{height:40px;background:#fff;border-radius:6px;padding:2px}
+header h1{font-size:20px;margin:0}
+header .sp{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+header a,header button{color:#fff;background:none;border:1px solid rgba(255,255,255,.4);border-radius:6px;padding:6px 12px;font:inherit;text-decoration:none;cursor:pointer}
+main{max-width:960px;margin:0 auto;padding:24px 16px;display:grid;gap:24px}
+fieldset{border:1px solid var(--line);border-radius:8px;padding:20px;background:var(--surface);display:grid;gap:14px;min-width:0}
+legend{font-weight:700;font-size:18px;padding:0 8px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+label{display:grid;gap:4px;font-size:14px;font-weight:500}
+input,select,textarea{font:inherit;font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);width:100%}
+textarea{min-height:90px}
+.btn{font:600 15px "Sarabun",sans-serif;border:0;border-radius:6px;padding:10px 18px;cursor:pointer;background:var(--accent);color:#fff}
+.btn.ghost{background:none;color:var(--fg);border:1px solid var(--line)}
+.btn:disabled{opacity:.5}
+.note{font-size:14px;color:var(--muted)}
+.err{color:var(--bad)}
+.thumbs{display:flex;flex-wrap:wrap;gap:8px}
+.thumbs div{position:relative}
+.thumbs img{width:96px;height:72px;object-fit:cover;border-radius:4px;display:block}
+.thumbs button{position:absolute;top:2px;right:2px;border:0;border-radius:50%;width:22px;height:22px;background:rgba(0,0,0,.65);color:#fff;cursor:pointer}
+.list{display:grid;gap:10px}
+.item{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px}
+.item img{width:88px;height:66px;object-fit:cover;border-radius:4px;flex:none}
+.item .t{flex:1;min-width:0}
+.item .t b{display:block}
+.pill{font-size:12px;background:var(--soft);border-radius:99px;padding:1px 10px}
+.status{position:sticky;bottom:0;background:var(--brand);color:#fff;padding:10px 16px;border-radius:6px}
+</style>
+</head>
+<body>
+<header><img src="images/mark.jpg" alt=""><h1>Rehome · หลังบ้าน</h1>
+  <div class="sp"><a href="./" target="_blank">ดูหน้าเว็บ</a><button id="logout" hidden>ออกจากระบบ</button></div></header>
+
+<main>
+<fieldset id="loginBox"><legend>เข้าสู่ระบบ</legend>
+  <p class="note" style="margin:0">ใช้ GitHub Token ของคุณ (ทำครั้งเดียว ดูวิธีสร้างใน README ข้อ 5) · Token จะเก็บไว้ในเครื่องนี้เท่านั้น</p>
+  <label>GitHub Token<input id="token" type="password" autocomplete="off" placeholder="github_pat_..."></label>
+  <div><button class="btn" id="loginBtn">เข้าสู่ระบบ</button> <span id="loginMsg" class="note"></span></div>
+</fieldset>
+
+<div id="app" hidden style="display:grid;gap:24px">
+<form id="form"><fieldset><legend id="legend">เพิ่มผลงานใหม่</legend>
+  <input type="hidden" id="p_id">
+  <div class="row">
+    <label>ชื่อผลงาน *<input id="p_title" required></label>
+    <label>ประเภท<select id="p_type"><option>สร้างบ้านใหม่</option><option>รีโนเวท</option><option>ต่อเติม</option><option>ซ่อมแซม</option></select></label>
+    <label>สถานที่<input id="p_location" placeholder="เช่น สกลนคร"></label>
+  </div>
+  <div class="row">
+    <label>พื้นที่ (ตร.ม.)<input id="p_area" inputmode="numeric"></label>
+    <label>ระยะเวลา<input id="p_duration" placeholder="เช่น 120 วัน"></label>
+    <label>งบประมาณ<input id="p_budget" placeholder="เช่น 850,000 บาท"></label>
+    <label>ปีที่แล้วเสร็จ<input id="p_year" placeholder="2569"></label>
+  </div>
+  <label>รายละเอียดงาน<textarea id="p_desc"></textarea></label>
+  <label>ลิงก์วิดีโอ YouTube / TikTok / Facebook<input id="p_videoUrl" placeholder="https://..."></label>
+  <label>เพิ่มรูป (รูปแรกเป็นภาพปก · ย่อขนาดให้อัตโนมัติ)<input id="p_files" type="file" accept="image/*" multiple></label>
+  <div class="thumbs" id="thumbs"></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+    <button class="btn" id="save">บันทึกและเผยแพร่</button>
+    <button class="btn ghost" type="button" id="reset">ล้างฟอร์ม</button>
+  </div>
+</fieldset></form>
+
+<section><h2 style="margin:0 0 12px">ผลงานทั้งหมด</h2><div class="list" id="list"></div></section>
+</div>
+<div class="status" id="status" hidden></div>
+</main>
+
+<script>
+const OWNER='sarochwora-creator', REPO='rehome', BRANCH='main';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let token='', projects=[], jsonSha=null, media=[]; // media: {src} existing or {src, b64, path} new
+const status=t=>{$('#status').hidden=!t;$('#status').textContent=t||''};
+try{token=localStorage.getItem('rehome_token')||''}catch{}
+
+async function gh(path,opt={}){
+  const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/${path}`,{...opt,headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github+json',...(opt.headers||{})}});
+  if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(r.status===401?'Token ไม่ถูกต้องหรือหมดอายุ':r.status===403||r.status===404?'Token ไม่มีสิทธิ์เขียน repo rehome':(e.message||r.status))}
+  return r.json()}
+const toB64=str=>{const bytes=new TextEncoder().encode(str);let bin='';for(let i=0;i<bytes.length;i+=8192)bin+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(bin)};
+const fromB64=b=>new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\n/g,'')),c=>c.charCodeAt(0)));
+
+async function load(){
+  const f=await gh(`contents/projects.json?ref=${BRANCH}&t=${Date.now()}`);
+  jsonSha=f.sha;projects=JSON.parse(fromB64(f.content));renderList()}
+
+$('#loginBtn').onclick=async()=>{token=$('#token').value.trim();if(!token)return;$('#loginMsg').textContent='กำลังตรวจสอบ...';
+  try{await load();try{localStorage.setItem('rehome_token',token)}catch{};showApp()}catch(e){$('#loginMsg').innerHTML=`<span class="err">${esc(e.message)}</span>`}};
+$('#logout').onclick=()=>{try{localStorage.removeItem('rehome_token')}catch{};location.reload()};
+function showApp(){$('#loginBox').hidden=true;$('#app').hidden=false;$('#logout').hidden=false}
+if(token)load().then(showApp).catch(()=>{});
+
+function renderList(){
+  $('#list').innerHTML=projects.length?projects.map(p=>`<div class="item"><img src="${esc((p.media||[])[0]?.src||'images/mark.jpg')}" alt="">
+   <div class="t"><b>${esc(p.title)}</b><span class="pill">${esc(p.type)}</span> <span class="note">${(p.media||[]).length} รูป${p.location?' · '+esc(p.location):''}</span></div>
+   <button class="btn ghost" data-edit="${esc(p._id)}">แก้ไข</button><button class="btn ghost" data-del="${esc(p._id)}">ลบ</button></div>`).join(''):'<p class="note">ยังไม่มีผลงาน</p>'}
+$('#list').onclick=async e=>{const ed=e.target.dataset.edit,dl=e.target.dataset.del;
+  if(ed){const p=projects.find(x=>x._id===ed);$('#p_id').value=ed;['title','type','location','area','duration','budget','year','desc','videoUrl'].forEach(k=>$('#p_'+k).value=p[k]||'');
+    media=(p.media||[]).map(m=>({src:m.src}));renderThumbs();$('#legend').textContent='แก้ไขผลงาน';scrollTo({top:0,behavior:'smooth'})}
+  if(dl){if(!e.target.dataset.sure){e.target.dataset.sure=1;e.target.textContent='ยืนยันลบ';return}
+    try{status('กำลังลบ...');await commit(projects.filter(x=>x._id!==dl),[],'ลบผลงาน');status('ลบแล้ว · หน้าเว็บอัปเดตใน 1–2 นาที')}catch(err){status('ลบไม่สำเร็จ: '+err.message)}}};
+
+function renderThumbs(){$('#thumbs').innerHTML=media.map((m,i)=>`<div><img src="${esc(m.preview||m.src)}" alt=""><button type="button" data-rm="${i}" aria-label="ลบรูป">×</button></div>`).join('')}
+$('#thumbs').onclick=e=>{const i=e.target.dataset.rm;if(i!=null){media.splice(+i,1);renderThumbs()}};
+function shrink(file){return new Promise((ok,no)=>{const img=new Image();img.onload=()=>{const k=Math.min(1,1600/Math.max(img.width,img.height));
+  const c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+  URL.revokeObjectURL(img.src);ok(c.toDataURL('image/jpeg',.82))};img.onerror=()=>no(new Error('อ่านรูปไม่ได้: '+file.name));img.src=URL.createObjectURL(file)})}
+$('#p_files').onchange=async e=>{for(const f of e.target.files){try{const d=await shrink(f);media.push({preview:d,b64:d.split(',')[1]})}catch(err){status(err.message)}}e.target.value='';renderThumbs()};
+const resetForm=()=>{$('#form').reset();$('#p_id').value='';media=[];renderThumbs();$('#legend').textContent='เพิ่มผลงานใหม่'};
+$('#reset').onclick=resetForm;
+
+async function commit(list,uploads,label){
+  for(const [i,u] of uploads.entries()){status(`กำลังอัปโหลดรูป ${i+1}/${uploads.length}...`);
+    await gh('contents/'+u.path,{method:'PUT',body:JSON.stringify({message:`${label}: รูป ${u.path}`,content:u.b64,branch:BRANCH})})}
+  status('กำลังบันทึกข้อมูลผลงาน...');
+  const r=await gh('contents/projects.json',{method:'PUT',body:JSON.stringify({message:label,content:toB64(JSON.stringify(list,null,2)+'\n'),sha:jsonSha,branch:BRANCH})});
+  jsonSha=r.content.sha;projects=list;renderList()}
+
+$('#form').addEventListener('submit',async e=>{e.preventDefault();$('#save').disabled=true;
+  try{const id=$('#p_id').value||'p'+Date.now().toString(36);const uploads=[];
+    const m=media.map((x,i)=>{if(x.b64){const path=`images/${id}-${Date.now().toString(36)}-${i+1}.jpg`;uploads.push({path,b64:x.b64});return {kind:'image',src:path}}return {kind:'image',src:x.src}});
+    const o={_id:id,title:$('#p_title').value.trim()};['type','location','area','duration','budget','year','desc','videoUrl'].forEach(k=>o[k]=$('#p_'+k).value.trim());o.media=m;
+    const exists=projects.some(p=>p._id===id);
+    const list=exists?projects.map(p=>p._id===id?o:p):[o,...projects];
+    await commit(list,uploads,(exists?'แก้ไขผลงาน: ':'เพิ่มผลงาน: ')+o.title);
+    resetForm();status('เผยแพร่แล้ว · หน้าเว็บจะอัปเดตภายใน 1–2 นาที')}
+  catch(err){status('บันทึกไม่สำเร็จ: '+err.message+(String(err.message).includes('sha')?' (มีการแก้ไขจากที่อื่น กดรีเฟรชแล้วลองใหม่)':''))}
+  $('#save').disabled=false});
+</script>
+</body>
+</html>
