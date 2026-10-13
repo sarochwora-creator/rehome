@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Rehome รับสร้างบ้าน รีโนเวท ต่อเติม ซ่อมแซมอาคารทุกประเภท บ้านเก่า เราเล่าใหม่">
+<link rel="icon" href="images/mark.jpg">
+<title>Rehome บ้านเก่า เราเล่าใหม่</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=Sarabun:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky nav + stacked sections (hero, portfolio grid, register form, chat), owner panel behind a tab */
+:root{
+  --bg:#F7F5F2; --surface:#FFFFFF; --fg:#2B2A28; --muted:#6E6A64; --line:#E2DDD6;
+  --brand:#2F2E2C; --brand-fg:#F7F5F2; --accent:#9A5F2A; --accent-fg:#FFFFFF; --wood:#C08A55; --concrete:#8E8B86;
+  --ok:#3F7D4E; --warn:#9A5F2A; --soft:#EFEAE3;
+  --display:"Bai Jamjuree","Sarabun",system-ui,sans-serif;
+  --body:"Sarabun",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1B1A18;--surface:#252321;--fg:#EEEAE4;--muted:#A8A199;--line:#3A3632;--brand:#141312;--brand-fg:#EEEAE4;--accent:#C98A4E;--accent-fg:#1B1A18;--wood:#D9A574;--concrete:#8E8B86;--ok:#6DBB82;--warn:#C98A4E;--soft:#2E2B28;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1B1A18;--surface:#252321;--fg:#EEEAE4;--muted:#A8A199;--line:#3A3632;--brand:#141312;--brand-fg:#EEEAE4;--accent:#C98A4E;--accent-fg:#1B1A18;--wood:#D9A574;--concrete:#8E8B86;--ok:#6DBB82;--warn:#C98A4E;--soft:#2E2B28;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.65}
+h1,h2,h3{font-family:var(--display);line-height:1.25;text-wrap:balance;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:16px;padding-block:10px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:.02em;color:var(--fg)}
+.logo img{height:44px;width:auto;background:#fff;border-radius:6px;padding:2px}
+.logo .re{color:var(--accent)}
+.herologo{background:#fff;border-radius:10px;padding:12px;max-width:260px;width:100%;justify-self:center}
+.hero{border-bottom:6px solid var(--wood)}
+.logo small{display:block;font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.04em}
+nav .links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+nav button{background:none;border:0;font:inherit;color:var(--fg);padding:6px 12px;border-radius:6px;cursor:pointer}
+nav button:hover,nav button:focus-visible{background:var(--soft);outline:none}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 15px var(--body);border:0;border-radius:6px;padding:10px 18px;cursor:pointer;background:var(--brand);color:var(--brand-fg)}
+.btn.alt{background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn:disabled{opacity:.55;cursor:default}
+section{padding-block:56px}
+.eyebrow{font-size:13px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;font-weight:600}
+.hero{background:var(--brand);color:var(--brand-fg);padding-block:64px}
+.hero .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(32px,6vw,56px)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{max-width:52ch;opacity:.9}
+.hero .eyebrow,.hero h1 em{color:var(--wood)}
+.services{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.18);border-radius:8px;overflow:hidden}
+.services div{background:var(--brand);padding:18px}
+.services b{font-family:var(--display);display:block;font-size:17px}
+.services span{font-size:14px;opacity:.8}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.head h2{font-size:clamp(26px,4vw,36px)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:99px;padding:5px 14px;font:inherit;font-size:14px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;text-align:left;font:inherit;color:inherit;padding:0}
+.card:hover{border-color:var(--brand)}
+.thumb{aspect-ratio:4/3;max-width:100%;background:var(--soft);display:grid;place-items:center;color:var(--muted);position:relative;overflow:hidden}
+.thumb img,.thumb video{width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;top:10px;left:10px;background:var(--accent);color:var(--accent-fg);font-size:12px;font-weight:600;padding:2px 10px;border-radius:4px}
+.badge.vid{left:auto;right:10px;background:var(--fg);color:var(--bg)}
+.card .body{padding:16px;display:grid;gap:4px}
+.card h3{font-size:18px}
+.meta{font-size:14px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;font-variant-numeric:tabular-nums}
+.empty{border:1px dashed var(--line);border-radius:8px;padding:40px 20px;text-align:center;color:var(--muted)}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;display:grid;place-items:center;padding:16px}
+.modal .box{background:var(--surface);border-radius:10px;max-width:860px;width:100%;max-height:90vh;overflow:auto;padding:24px;display:grid;gap:16px}
+.gallery{display:grid;gap:10px}
+.gallery img,.gallery video{width:100%;border-radius:6px;background:var(--soft)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;border-block:1px solid var(--line);padding-block:12px}
+.facts dt{font-size:13px;color:var(--muted)} .facts dd{margin:0;font-weight:600}
+/* form */
+form{display:grid;gap:28px}
+fieldset{border:1px solid var(--line);border-radius:8px;padding:20px;background:var(--surface);display:grid;gap:16px;min-width:0}
+legend{font-family:var(--display);font-weight:600;font-size:18px;padding-inline:8px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+label{display:grid;gap:4px;font-size:14px;font-weight:500;min-width:0}
+label .req{color:var(--warn)}
+input,select,textarea{font:inherit;font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);width:100%}
+textarea{min-height:90px;resize:vertical}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-weight:400;cursor:pointer;background:var(--bg)}
+.checks input{width:auto}
+.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.types label{border:1px solid var(--line);border-radius:8px;padding:14px;cursor:pointer;background:var(--bg);display:flex;gap:10px;align-items:flex-start}
+.types input{width:auto;margin-top:5px}
+.types label:has(input:checked){border-color:var(--brand);background:var(--soft)}
+.types b{font-family:var(--display);display:block}
+.types span{font-size:13px;color:var(--muted);font-weight:400}
+.note{font-size:14px;color:var(--muted)}
+.msg{padding:12px 16px;border-radius:6px;background:var(--soft);font-weight:500}
+/* chat */
+.fab{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40}
+.chat{position:fixed;right:16px;bottom:calc(76px + env(safe-area-inset-bottom,0px));width:min(380px,calc(100vw - 32px));height:min(520px,70vh);background:var(--surface);border:1px solid var(--line);border-radius:10px;z-index:45;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.chat header{background:var(--brand);color:var(--brand-fg);padding:12px 16px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center}
+.chat header button{background:none;border:0;color:inherit;font-size:20px;cursor:pointer}
+.msgs{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.bubble{max-width:80%;padding:8px 12px;border-radius:10px;font-size:15px;white-space:pre-wrap;word-break:break-word}
+.bubble.me{align-self:flex-end;background:var(--brand);color:var(--brand-fg)}
+.bubble.them{align-self:flex-start;background:var(--soft)}
+.bubble time{display:block;font-size:11px;opacity:.7}
+.chat form{display:flex;gap:6px;padding:10px;border-top:1px solid var(--line)}
+.chat form input{flex:1}
+/* admin */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.table{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600;color:var(--muted);white-space:nowrap}
+.pill{display:inline-block;padding:1px 10px;border-radius:99px;font-size:12px;font-weight:600;background:var(--soft)}
+.pill.new{background:var(--accent);color:var(--accent-fg)}
+.pill.done{background:var(--ok);color:#fff}
+.split{display:grid;grid-template-columns:260px 1fr;gap:16px;min-height:420px}
+.split>*{min-width:0}
+.list{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:auto;max-height:520px}
+.list button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:12px;font:inherit;color:inherit;cursor:pointer}
+.list button[aria-current="true"]{background:var(--soft)}
+.adminchat{background:var(--surface);border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;max-height:520px}
+footer{background:var(--fg);color:var(--bg);padding-block:32px;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:760px){.hero .wrap,.split{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+.fab .btn{box-shadow:0 6px 20px rgba(0,0,0,.25);border-radius:99px;text-decoration:none}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <div class="logo"><img src="images/mark.jpg" alt=""><div><span class="re">RE</span>HOME<small>บ้านเก่า | เราเล่าใหม่</small></div></div>
+  <div class="links">
+    <button data-go="work">ผลงาน</button>
+    <button data-go="register">ลงทะเบียนขอคำปรึกษา</button>
+      </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow">รับสร้าง · รีโนเวท · ต่อเติม · ซ่อมแซม</div>
+    <h1>บ้านเก่า <em>เราเล่าใหม่</em></h1>
+    <p>รับสร้างบ้านใหม่ รีโนเวทบ้านเก่า ต่อเติมและซ่อมแซมอาคารทุกประเภท ตั้งแต่ทาวน์โฮม บ้านเดี่ยว ไปจนถึงอาคารพาณิชย์ สำรวจหน้างานและประเมินราคาก่อนเริ่มงาน</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+      <button class="btn alt" data-go="register">ขอใบเสนอราคา</button>
+      <button class="btn ghost" style="color:var(--brand-fg);border-color:rgba(255,255,255,.4)" id="heroChat">LINE คุยกับเรา</button>
+    </div>
+  </div>
+  <div style="display:grid;gap:20px"><img class="herologo" src="images/logo.jpg" alt="Rehome บ้านเก่า เราเล่าใหม่">
+  <div class="services">
+    <div><b>สร้างบ้าน</b><span>ออกแบบ ขออนุญาต ก่อสร้างครบ</span></div>
+    <div><b>รีโนเวท</b><span>ปรับโฉมบ้านเก่าทั้งหลัง/บางส่วน</span></div>
+    <div><b>ต่อเติม</b><span>ห้องครัว โรงรถ ชั้นลอย ห้องนอน</span></div>
+    <div><b>ซ่อมแซม</b><span>หลังคารั่ว ผนังร้าว ระบบน้ำ-ไฟ</span></div>
+  </div></div>
+</div></header>
+
+<main>
+<section id="work"><div class="wrap">
+  <div class="head">
+    <div><div class="eyebrow">Portfolio</div><h2>ผลงานของเรา</h2></div>
+    <div class="filters" id="filters"></div>
+  </div>
+  <div id="grid" class="grid"></div>
+</div></section>
+
+<section id="register" style="background:var(--soft)"><div class="wrap">
+  <div class="head"><div><div class="eyebrow">ลงทะเบียน</div><h2>เล่าเรื่องบ้านของคุณให้เราฟัง</h2>
+  <p class="note" style="margin:6px 0 0">กรอกเท่าที่ทราบ ทีมงานจะติดต่อกลับภายใน 1 วันทำการเพื่อนัดสำรวจหน้างาน</p></div></div>
+  <form id="leadForm">
+    <fieldset><legend>1. ข้อมูลผู้ติดต่อ</legend>
+      <div class="row">
+        <label>ชื่อ-นามสกุล <span class="req">*</span><input id="f_name" name="name" required></label>
+        <label>เบอร์โทร <span class="req">*</span><input id="f_phone" name="phone" type="tel" required></label>
+        <label>LINE ID<input id="f_line" name="line"></label>
+        <label>อีเมล<input id="f_email" name="email" type="email"></label>
+      </div>
+      <div class="row">
+        <label>ช่องทางที่สะดวกให้ติดต่อ<select id="f_contactBy" name="contactBy"><option>โทรศัพท์</option><option>LINE</option><option>อีเมล</option></select></label>
+        <label>ช่วงเวลาที่สะดวก<select id="f_contactTime" name="contactTime"><option>ได้ทุกเวลา</option><option>เช้า 08:00–12:00</option><option>บ่าย 12:00–17:00</option><option>เย็น 17:00–20:00</option><option>เฉพาะเสาร์-อาทิตย์</option></select></label>
+        <label>รู้จักเราจาก<select id="f_source" name="source"><option>Facebook</option><option>TikTok</option><option>Google</option><option>LINE OA</option><option>เพื่อน/คนรู้จักแนะนำ</option><option>ป้าย/หน้างาน</option><option>อื่นๆ</option></select></label>
+      </div>
+    </fieldset>
+
+    <fieldset><legend>2. ประเภทงาน <span class="req">*</span></legend>
+      <div class="types">
+        <label><input type="radio" name="jobType" value="สร้างบ้านใหม่" required><div><b>สร้างบ้านใหม่</b><span>บนที่ดินเปล่า หรือรื้อสร้างใหม่</span></div></label>
+        <label><input type="radio" name="jobType" value="รีโนเวท"><div><b>รีโนเวท</b><span>ปรับปรุงบ้าน/อาคารเดิม</span></div></label>
+        <label><input type="radio" name="jobType" value="ต่อเติม"><div><b>ต่อเติม</b><span>เพิ่มพื้นที่ ห้อง หรือชั้น</span></div></label>
+        <label><input type="radio" name="jobType" value="ซ่อมแซม"><div><b>ซ่อมแซม</b><span>แก้ปัญหาเฉพาะจุด</span></div></label>
+      </div>
+    </fieldset>
+
+    <fieldset><legend>3. ข้อมูลอาคาร / สถานที่</legend>
+      <div class="row">
+        <label>ประเภทอาคาร<select id="f_building" name="building"><option>บ้านเดี่ยว</option><option>ทาวน์โฮม/ทาวน์เฮาส์</option><option>บ้านแฝด</option><option>อาคารพาณิชย์/ตึกแถว</option><option>คอนโด</option><option>โกดัง/โรงงาน</option><option>สำนักงาน/ร้านค้า</option><option>ที่ดินเปล่า</option><option>อื่นๆ</option></select></label>
+        <label>จำนวนชั้น<select id="f_floors" name="floors"><option>1 ชั้น</option><option>2 ชั้น</option><option>3 ชั้น</option><option>4 ชั้นขึ้นไป</option></select></label>
+        <label>อายุอาคาร (ปี)<input id="f_age" name="age" type="number" min="0" placeholder="เช่น 25"></label>
+        <label>พื้นที่ใช้สอย (ตร.ม.)<input id="f_area" name="area" type="number" min="0" placeholder="เช่น 120"></label>
+      </div>
+      <div class="row">
+        <label>ขนาดที่ดิน (ตร.ว.)<input id="f_land" name="land" type="number" min="0"></label>
+        <label>โครงสร้างเดิม<select id="f_structure" name="structure"><option>ไม่ทราบ / ไม่มี</option><option>คอนกรีตเสริมเหล็ก</option><option>ไม้</option><option>ครึ่งตึกครึ่งไม้</option><option>โครงเหล็ก</option></select></label>
+        <label>สถานะการอยู่อาศัยระหว่างก่อสร้าง<select id="f_living" name="living"><option>ไม่มีคนอยู่</option><option>ยังอยู่อาศัยระหว่างทำงาน</option><option>ยังไม่แน่ใจ</option></select></label>
+      </div>
+      <label>ที่อยู่หน้างาน (ตำบล/อำเภอ/จังหวัด) <span class="req">*</span><input id="f_address" name="address" required placeholder="เช่น ลาดพร้าว 71 แขวงลาดพร้าว เขตลาดพร้าว กรุงเทพฯ"></label>
+      <label>ลิงก์ Google Maps (ถ้ามี)<input id="f_map" name="map" placeholder="https://maps.app.goo.gl/..."></label>
+      <div class="row">
+        <label>เป็นหมู่บ้าน/โครงการที่มีนิติบุคคล<select id="f_juristic" name="juristic"><option>ไม่ใช่</option><option>ใช่ (ต้องขออนุญาตนิติฯ)</option></select></label>
+        <label>ทางเข้าหน้างาน<select id="f_access" name="access"><option>รถบรรทุก 6 ล้อเข้าได้</option><option>รถกระบะเข้าได้เท่านั้น</option><option>ซอยแคบ/ต้องขนเข้า</option></select></label>
+        <label>ที่จอดรถทีมงาน<select id="f_parking" name="parking"><option>มี</option><option>ไม่มี</option></select></label>
+      </div>
+    </fieldset>
+
+    <fieldset><legend>4. รายละเอียดงานที่ต้องการ</legend>
+      <div>
+        <div style="font-size:14px;font-weight:500;margin-bottom:6px">ส่วนที่ต้องการทำ (เลือกได้หลายข้อ)</div>
+        <div class="checks" id="scope"></div>
+      </div>
+      <div>
+        <div style="font-size:14px;font-weight:500;margin-bottom:6px">ปัญหาที่พบ (ถ้ามี)</div>
+        <div class="checks" id="problems"></div>
+      </div>
+      <div class="row">
+        <label>สไตล์ที่ชอบ<select id="f_style" name="style"><option>ยังไม่แน่ใจ</option><option>โมเดิร์น</option><option>มินิมอล</option><option>ลอฟท์/อินดัสเทรียล</option><option>นอร์ดิก/สแกนดิเนเวียน</option><option>ญี่ปุ่น/มูจิ</option><option>ไทยร่วมสมัย</option><option>คลาสสิก/ยุโรป</option><option>ทรอปิคอล</option></select></label>
+        <label>ต้องการแบบ/ออกแบบ<select id="f_design" name="design"><option>ให้ Rehome ออกแบบให้</option><option>มีแบบอยู่แล้ว</option><option>มีแค่ภาพตัวอย่าง/ไอเดีย</option></select></label>
+        <label>ต้องการขออนุญาตก่อสร้าง<select id="f_permit" name="permit"><option>ไม่แน่ใจ ให้แนะนำ</option><option>ต้องการให้ดำเนินการให้</option><option>มีใบอนุญาตแล้ว</option><option>ไม่จำเป็น</option></select></label>
+      </div>
+      <label>อธิบายงานที่ต้องการเพิ่มเติม <span class="req">*</span><textarea id="f_detail" name="detail" required placeholder="เช่น ต่อเติมครัวหลังบ้านประมาณ 3x4 ม. หลังคาเมทัลชีท ปูกระเบื้องใหม่ ย้ายซิงก์ล้างจาน"></textarea></label>
+    </fieldset>
+
+    <fieldset><legend>5. งบประมาณและระยะเวลา</legend>
+      <div class="row">
+        <label>งบประมาณโดยประมาณ<select id="f_budget" name="budget"><option>ยังไม่กำหนด</option><option>ต่ำกว่า 100,000 บาท</option><option>100,000 – 300,000 บาท</option><option>300,000 – 700,000 บาท</option><option>700,000 – 1,500,000 บาท</option><option>1,500,000 – 3,000,000 บาท</option><option>3,000,000 – 5,000,000 บาท</option><option>มากกว่า 5,000,000 บาท</option></select></label>
+        <label>แหล่งเงินทุน<select id="f_finance" name="finance"><option>เงินสด</option><option>สินเชื่อธนาคาร / สินเชื่อบ้าน</option><option>สินเชื่อ + เงินสด</option><option>ยังไม่แน่ใจ</option></select></label>
+        <label>ต้องการเริ่มงาน<select id="f_start" name="start"><option>ภายใน 1 เดือน</option><option>1–3 เดือน</option><option>3–6 เดือน</option><option>มากกว่า 6 เดือน</option><option>แค่สอบถามราคาก่อน</option></select></label>
+        <label>ต้องการให้เสร็จภายใน (วันที่)<input id="f_deadline" name="deadline" type="date"></label>
+      </div>
+      <div class="row">
+        <label>วันที่สะดวกให้สำรวจหน้างาน<input id="f_survey" name="survey" type="date"></label>
+        
+      </div>
+      <p class="note" id="photoNote">ส่งรูปหน้างานให้เราทาง LINE ได้หลังกรอกฟอร์ม</p>
+    </fieldset>
+
+    <label class="checks" style="display:flex"><label><input type="checkbox" id="f_consent" required> ยินยอมให้ Rehome เก็บข้อมูลเพื่อติดต่อกลับและเสนอราคา</label></label>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <button class="btn alt" type="submit" id="submitBtn">ส่งข้อมูล</button>
+      <span id="formMsg" class="note" role="status"></span>
+    </div>
+  </form>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  <div><b style="font-family:var(--display);font-size:18px"><span style="color:var(--wood)">RE</span>HOME</b><br>บ้านเก่า เราเล่าใหม่ · รับสร้าง รีโนเวท ต่อเติม ซ่อมแซมอาคารทุกประเภท</div>
+  <div>สำรวจหน้างานและประเมินราคาฟรี</div>
+</div></footer>
+
+<div class="fab" id="fab"><a class="btn alt" id="lineBtn" target="_blank" rel="noopener">LINE คุยกับเรา</a><a class="btn" id="telBtn">โทรหาเรา</a></div>
+
+<div class="modal" id="modal" hidden><div class="box" id="modalBox"></div></div>
+
+<script src="app.js"></script>
+</body>
+</html>

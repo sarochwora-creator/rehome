@@ -1,0 +1,44 @@
+[
+  {
+    "_id": "p2y96sqdv",
+    "title": "บ้านครูตุ่ม",
+    "type": "สร้างบ้านใหม่",
+    "location": "สกลนคร",
+    "area": "200",
+    "duration": "300 วัน",
+    "budget": "2,590,000 บาท",
+    "year": "2565",
+    "desc": "บ้านสไตล์โมเดิร์น 2 ชั้น 4 ห้องนอน 3 ห้องน้ำ 1 ห้องนั่งเล่น",
+    "videoUrl": "",
+    "media": [
+      {
+        "kind": "image",
+        "src": "images/p2y96sqdv-1.jpg"
+      },
+      {
+        "kind": "image",
+        "src": "images/p2y96sqdv-2.jpg"
+      },
+      {
+        "kind": "image",
+        "src": "images/p2y96sqdv-3.jpg"
+      },
+      {
+        "kind": "image",
+        "src": "images/p2y96sqdv-4.jpg"
+      },
+      {
+        "kind": "image",
+        "src": "images/p2y96sqdv-5.jpg"
+      },
+      {
+        "kind": "image",
+        "src": "images/p2y96sqdv-6.jpg"
+      },
+      {
+        "kind": "image",
+        "src": "images/p2y96sqdv-7.jpg"
+      }
+    ]
+  }
+]
